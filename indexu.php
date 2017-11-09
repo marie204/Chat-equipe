@@ -26,13 +26,11 @@
 			$.ajax({
 				url:'http://messenger.api.niamor.com/createUser',
 				method:'post'				
-			})
-
-			//.done(afficheChat);
+			}).done(afficheChat);
 		}
 		function afficheChat(msg){
 			for (var i = 0; i != msg.length - 1; i++) {
-				console.log(msg+"<br>")
+				console.log(msg[i]);
 			}
 
 
