@@ -28,10 +28,12 @@
 				method:'post'				
 			}).done(afficheChat);
 		}
-		function afficheChat(msg){
-			for (var i = 0; i != msg.length - 1; i++) {
+		function afficheChat(user){
+			console.log(user.authKey);
+
+			/*cause la mort du navigateur! for (var i = 0; i != msg.length - 1; i++) {
 				console.log(msg[i]);
-			}
+			}*/
 
 
 			
