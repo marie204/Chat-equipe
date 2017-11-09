@@ -15,5 +15,19 @@
 	<div class="col-3 lightblue" style="background-color: lightblue; height: 100vh"></div></div>
 
 	<footer class="lightblue"> <input class="lightblue" id="inputfoot" type="text"> <button id="buttonfoot">valider</button></footer>
+
+	<script>
+		
+
+		function recupChat(){
+			$ajax({
+				url:'http://messenger.api.niamor.com'
+				method:'post'				
+			}).done(afficheChat);
+		}
+		function afficheChat(){
+			
+		}
+	</script>
 </body>
 </html>
