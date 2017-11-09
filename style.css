@@ -2,16 +2,17 @@ div{
 	height: 100vh;
 	border: solid black;
 }
-footer{
-
+footer{	
+	position: float;
+	margin-bottom: 2px;
+	border: solid black;
+	width: 100vh;
 }
 #inputfoot{
-	position: sticky;
-	margin-bottom: 2px;
 	width: 88%;
+	border: solid black;
 }
 #buttonfoot{
-	position: sticky;
 	width: 9%;
 	text-align: center;
 }
