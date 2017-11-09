@@ -9,11 +9,12 @@
 </head>
 <body class="lightblue">
 	<div class="row">
-	<div class="col-9" style="background-color: pink;">
+	<div class="col-9" style="background-color: oliveDrab;">
 	</div>
 
-	<div class="col-3 lightblue" style="background-color: lightblue; height: 100vh"></div></div>
+	<div class="col-3 DarkSeaGreen" style="background-color: DarkSeaGreen; height: 100vh"></div></div>
 
-	<footer class="lightblue"> <input class="lightblue" id="inputfoot" type="text"> <button id="buttonfoot">valider</button></footer>
+	<footer class="lightblue"> <input class="white" id="inputfoot" type="text"> <button id="buttonfoot" style="background-color: IndianRed" width: 100%>valider</button></footer>
 </body>
 </html>
+
