@@ -1,0 +1,21 @@
+div{
+	height: 100vh;
+	border: solid black;
+}
+footer{	
+	position: float;
+	margin-bottom: 2px;
+	border: solid black;
+	width: 100vh;
+}
+#inputfoot{
+	width: 88%;
+	border: solid black;
+}
+#buttonfoot{
+	width: 9%;
+	text-align: center;
+}
+.lightblue{
+	background-color: lightblue;
+}
