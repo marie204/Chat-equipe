@@ -10,18 +10,18 @@
 
 
 </head>
-<body class="lightblue" style="">
+	<div style="height: 100vh; width: 100%">
 	<div class="row" style="width: 100vh; ">
 	<div class="col-9" id="chat" style="background-color: pink; overflow-x:scroll">
 		
 	</div>
 
 	<div class="col-3 lightblue" id="pseudo" style="background-color: lightblue; height: 100vh; overflow-x:scroll">
-		<button onclick="getUsers();">Recup pseudo</button>
+		
 	</div></div>
 
 
-	<footer class="lightblue"> <input class="lightblue" id="inputfoot" type="text"> <button id="buttonfoot" onclick="sendMessage();">valider</button><br> <button onclick="changePseudo();">Change pseudo</button></footer>
+	<footer class="lightblue"> <input class="lightblue" id="inputfoot" onkeypress="testTouche();" type="text"> <button id="buttonfoot" onclick="sendMessage();">valider</button><br> <button onclick="changePseudo();">Change pseudo</button></footer>
 
 	<script>
 		var userInfo;
@@ -30,6 +30,12 @@
 		setInterval(function(){recupChatMsg()}, 1000);
 		setInterval(function(){getUsers()}, 1000);
 		
+
+		function testTouche(){
+			if (event.keyCode == 13){
+				sendMessage();
+			}
+		}
 
 		function recupChat(){
 			lastId = 0;
@@ -51,6 +57,7 @@
 		function affichePseudo(otUsers){
 			//a = otUsers.length;
 			//02e2b95864c8a3e6b239e3871ad0b975
+			document.getElementById('pseudo').innerHTML = '';
 			for (var i = 0; i != otUsers.length; i++) {
 				document.getElementById('pseudo').innerHTML +=  otUsers[i].username+ "<br>";
 				//console.log(otUsers[i]);
@@ -80,8 +87,7 @@
 				lastId = msgEnv[i].id;
 			}
 		}
-		function sendMessage(){
-			a = document.getElementById('inputfoot').innerHTML;
+		function sendMessage(){			
 			$.ajax({
 				url:'http://messenger.api.niamor.com/sendMessage',
 				method:'post',
