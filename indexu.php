@@ -21,14 +21,18 @@
 	</div></div>
 
 
-	<footer class="lightblue"> <input class="lightblue" id="inputfoot" onkeypress="testTouche();" type="text"> <button id="buttonfoot" onclick="sendMessage();">valider</button><br> <button onclick="changePseudo();">Change pseudo</button></footer>
+	<footer class="lightblue"> <input class="lightblue" id="inputfoot" onkeypress="testTouche();" type="text"> <button id="buttonfoot" onclick="sendMessage();">valider</button><br> <button onclick="changePseudo();">Change pseudo</button>
+		<select name="MP" id="selectPseudo"></select>
+
+	</footer>
 
 	<script>
 		var userInfo;
 		recupChat();
+		getUsers();
 		var lastId;
 		setInterval(function(){recupChatMsg()}, 1000);
-		setInterval(function(){getUsers()}, 1000);
+		setInterval(function(){getUsers()}, 10000);
 		
 
 		function testTouche(){
@@ -57,9 +61,13 @@
 		function affichePseudo(otUsers){
 			//a = otUsers.length;
 			//02e2b95864c8a3e6b239e3871ad0b975
-			document.getElementById('pseudo').innerHTML = '';
+			document.getElementById('selectPseudo').innerHTML = '';
+			document.getElementById('pseudo').innerHTML =" "
+			document.getElementById('selectPseudo').innerHTML='<option value='+0+'>"tout le monde"</option>';
 			for (var i = 0; i != otUsers.length; i++) {
 				document.getElementById('pseudo').innerHTML +=  otUsers[i].username+ "<br>";
+				document.getElementById('selectPseudo').innerHTML += '<option value="'+otUsers[i].id+'">'+otUsers[i].username+'</option>'
+				//<option value="A">A </option>
 				//console.log(otUsers[i]);
 			}
 			//console.log(a);
@@ -82,19 +90,20 @@
 		function afficheMsg(msgEnv){
 			
 			for (var i = 0; i <= msgEnv.length; i++) {
-				console.log(msgEnv[i])
+				//console.log(msgEnv[i])
 				document.getElementById('chat').innerHTML += msgEnv[i].from.username+":"+msgEnv[i].text+"<br>";
 				lastId = msgEnv[i].id;
 			}
 		}
 		function sendMessage(){			
+			//console.log(document.getElementById('selectPseudo').value);
 			$.ajax({
 				url:'http://messenger.api.niamor.com/sendMessage',
 				method:'post',
 				data:{
 					authKey: userInfo[1],
 					text: document.getElementById('inputfoot').value, 
-					to: 0
+					to: document.getElementById('selectPseudo').value
 				}
 			}).done(clearValue)
 		}
