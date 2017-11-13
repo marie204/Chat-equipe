@@ -10,25 +10,29 @@
 
 
 </head>
-<body class="lightblue">
-	<div class="row" style="width: 100vh">
-	<div class="col-9" id="chat" style="background-color: pink;">
-		<button onclick="recupChatMsg();"> recup message</button>
+<body class="lightblue" style="">
+	<div class="row" style="width: 100vh; ">
+	<div class="col-9" id="chat" style="background-color: pink; overflow-x:scroll">
+		
 	</div>
 
-	<div class="col-3 lightblue" id="pseudo" style="background-color: lightblue; height: 100vh">
+	<div class="col-3 lightblue" id="pseudo" style="background-color: lightblue; height: 100vh; overflow-x:scroll">
 		<button onclick="getUsers();">Recup pseudo</button>
 	</div></div>
 
 
-	<footer class="lightblue"> <input class="lightblue" id="inputfoot" type="text"> <button id="buttonfoot" onclick="sendMessage();">valider</button></footer>
+	<footer class="lightblue"> <input class="lightblue" id="inputfoot" type="text"> <button id="buttonfoot" onclick="sendMessage();">valider</button><br> <button onclick="changePseudo();">Change pseudo</button></footer>
 
 	<script>
 		var userInfo;
 		recupChat();
+		var lastId;
+		setInterval(function(){recupChatMsg()}, 1000);
+		setInterval(function(){getUsers()}, 1000);
 		
 
 		function recupChat(){
+			lastId = 0;
 			$.ajax({
 				url:'http://messenger.api.niamor.com/createUser',
 				method:'post'				
@@ -62,16 +66,18 @@
 				method: 'post', 
 				data: {
 					authKey: userInfo[1],
-					lastId : 0,
+					lastId : lastId,
 				}
 				
 			}).done(afficheMsg)
 		}
 		//console.log(userInfo);
 		function afficheMsg(msgEnv){
+			
 			for (var i = 0; i <= msgEnv.length; i++) {
 				console.log(msgEnv[i])
 				document.getElementById('chat').innerHTML += msgEnv[i].from.username+":"+msgEnv[i].text+"<br>";
+				lastId = msgEnv[i].id;
 			}
 		}
 		function sendMessage(){
@@ -88,6 +94,15 @@
 		}
 		function clearValue(){
 			document.getElementById('inputfoot').value = '';
+		}
+		function changePseudo(){			
+			$.ajax({
+				url:'http://messenger.api.niamor.com/changeUsername',
+				method:'post',
+				data:{
+					authKey: userInfo[1],
+					username: document.getElementById('inputfoot').value
+				}}).done(clearValue)
 		}
 	</script>
 </body>
